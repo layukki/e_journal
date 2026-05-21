@@ -16,7 +16,7 @@ st.set_page_config(
 conn = sqlite3.connect("journal.db", check_same_thread=False)
 c = conn.cursor()
 
-# ======================= СОЗДАНИЕ ТАБЛИЦ =======================
+# СОЗДАНИЕ ТАБЛИЦ
 c.execute("""
 CREATE TABLE IF NOT EXISTS users (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -78,7 +78,7 @@ CREATE TABLE IF NOT EXISTS grades (
 conn.commit()
 
 
-# ======================= ЭКСПОРТ В EXCEL (ИСПРАВЛЕНО) =======================
+# ЭКСПОРТ В EXCEL
 def generate_excel(
     disc_name,
     group_name,
@@ -217,7 +217,7 @@ def generate_excel(
     return buf
 
 
-# ======================= АВТОРИЗАЦИЯ И ОСНОВНАЯ ЛОГИКА =======================
+# АВТОРИЗАЦИЯ
 if "user" not in st.session_state:
     st.title("Электронный журнал")
     with st.form("login"):
@@ -262,7 +262,7 @@ else:
 
     page = st.sidebar.radio("Меню", menu)
 
-    # ======================= ЖУРНАЛ =======================
+    # ЖУРНАЛ
     if page == "Журнал":
         st.header("Журнал")
 
@@ -555,7 +555,7 @@ else:
                         else:
                             st.info("Изменений нет")
 
-    # ======================= АДМИН ПАНЕЛЬ =======================
+    # АДМИН ПАНЕЛЬ
     if user["role"] == "admin" and page != "Журнал":
         if page == "Пользователи":
             st.subheader("Создать пользователя")
